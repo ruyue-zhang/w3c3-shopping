@@ -1,24 +1,10 @@
-<tr class="item">
-<td id="choose">选择</td>
-<td id="name">商品名称</td>
-<td id="price">商品单价(￥)</td>
-<td id="total-number">商品数量</td>
-<td id="total-price">总价(￥)</td>
-</tr>
 
-var good = "<tr> <td>选择</td> <td>商品名称</td> <td>商品单价(￥)</td> <td>商品数量</td> <td>总价(￥)</td> </tr>";
-
-
-
-
-
-
-
-
-
-
-
-
+var goodsDescription = "<td>选择</td> <td>商品名称</td> <td>商品单价(￥)</td> <td>商品数量</td> <td>总价(￥)</td>";
+var tr = document.createElement("tr");
+tr.innerHTML = goodsDescription;
+var tbody = document.getElementsByTagName("tbody")[0];
+var tr2 = document.getElementsByTagName("tr")[1];
+tbody.insertBefore(tr,tr2);
 
 
 
