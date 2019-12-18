@@ -48,21 +48,58 @@ var carProducts = [
   }
 ]
 
+var count;
+//将所有商品数据加入到购物车中
 for (var i = 0; i < carProducts.length; i++) {
-  var name = carProducts[i].name;
-  var price = carProducts[i].price;
-  var count = carProducts[i].count;
-  var totalPrice = price * count;
-
-  var goodsDescription = "<td>"+(i+1)+"</td> <td>"+name+"</td> <td>"+price+"</td> <td>"+count+"</td> <td>"+totalPrice+"</td>";
-  var tr = document.createElement("tr");
-  tr.innerHTML = goodsDescription;
+  if(carProducts[i].count != 0) {
+    var name = carProducts[i].name;
+    var price = carProducts[i].price;
+    count = carProducts[i].count;
+    var totalPrice = price * count;
+    
+    var goodsDescription = "<td>"+(i+1)+"</td> <td>"+name+"</td> <td>"+price+"</td> <td><a href='#' class='num-change reduce'>-</a><span>"+count+"</span><a href='#' class='num-change increase'>+</a></td> <td>"+totalPrice+"</td>";
+    var tr = document.createElement("tr");
+    tr.innerHTML = goodsDescription;
   
-  var tr2 = document.getElementsByClassName("footer")[0];
-  var tbody = document.getElementsByTagName("tbody")[0];
-  tbody.insertBefore(tr,tr2);
+    var tr2 = document.getElementsByClassName("footer")[0];
+    var tbody = document.getElementsByTagName("tbody")[0];
+    tbody.insertBefore(tr,tr2); 
+  }
+}
+//找到加和减的DOM节点
+var increase = document.querySelectorAll(".increase");
+var reduce = document.querySelectorAll(".reduce");
+
+//数量添加事件
+for(var i = 0; i < increase.length; i++) {
+  increase[i].onclick = function() {
+    var amount = this.parentNode;
+    var span = amount.getElementsByTagName("span")[0];
+    ++span.innerText;
+    //计算这一行的小计
+    var tr = amount.parentNode;
+    var price = tr.getElementsByTagName("td")[2].innerText;
+    var count = span.innerText;
+    var totalPrice = count * price;
+    tr.getElementsByTagName("td")[4].innerText = totalPrice;
+  }
 }
 
+//数量减少事件
+for(var i = 0; i < reduce.length; i++) {
+  reduce[i].onclick = function() {
+    //数量变化
+    var amount = this.parentNode;
+    var span = amount.getElementsByTagName("span")[0];
+    --span.innerText;
+    //计算这一行的小计
+    var tr = amount.parentNode;
+    var price = tr.getElementsByTagName("td")[2].innerText;
+    var count = span.innerText;
+    var totalPrice = count * price;
+    tr.getElementsByTagName("td")[4].innerText = totalPrice;
+  }
+}
 
 
 
