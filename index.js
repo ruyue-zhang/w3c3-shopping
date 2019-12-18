@@ -1,22 +1,3 @@
-
-var goodsDescription = "<td>选择</td> <td>商品名称</td> <td>商品单价(￥)</td> <td>商品数量</td> <td>总价(￥)</td>";
-var tr = document.createElement("tr");
-tr.innerHTML = goodsDescription;
-var tbody = document.getElementsByTagName("tbody")[0];
-var tr2 = document.getElementsByTagName("tr")[1];
-tbody.insertBefore(tr,tr2);
-
-
-
-
-
-
-
-
-
-
-
-
 // 商品列表 JSON 数据
 var carProducts = [
   {
@@ -66,3 +47,31 @@ var carProducts = [
     "checked": false
   }
 ]
+
+for (var i = 0; i < carProducts.length; i++) {
+  var name = carProducts[i].name;
+  var price = carProducts[i].price;
+  var count = carProducts[i].count;
+  var totalPrice = price * count;
+
+  var goodsDescription = "<td>"+(i+1)+"</td> <td>"+name+"</td> <td>"+price+"</td> <td>"+count+"</td> <td>"+totalPrice+"</td>";
+  var tr = document.createElement("tr");
+  tr.innerHTML = goodsDescription;
+  
+  var tr2 = document.getElementsByClassName("footer")[0];
+  var tbody = document.getElementsByTagName("tbody")[0];
+  tbody.insertBefore(tr,tr2);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
