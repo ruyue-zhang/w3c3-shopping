@@ -1,0 +1,66 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.shopping {
+  position: relative;
+  margin: 50px auto;
+
+  width: 700px;
+
+  text-align: center;
+
+}
+
+.title {
+  font-size: 20px;
+  line-height: 40px;
+  letter-spacing: 10px;
+}
+
+table {
+  margin: 15px auto;
+  border-collapse: collapse;
+} 
+
+td {
+  border: 1px solid black;
+}
+
+.item {
+  line-height: 30px;
+  font-weight: 700;
+  background-color: rgb(108, 158, 245, 0.2);
+}
+
+tr {
+  line-height: 40px;
+}
+
+#choose {
+  width: 100px;
+}
+
+#name {
+  width: 200px;
+}
+
+#price {
+  width: 100px;
+}
+
+#total-number {
+  width: 150px;
+}
+
+#total-price {
+  width: 100px;
+}
+
+#all-choose {}
+
+#account {
+  padding-right: 15px;
+  text-align: right;
+}
