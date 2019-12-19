@@ -124,13 +124,13 @@ function numberChange(dom,act) {
   getTotal();
 }
 
+
 //单选框点击事件
 for(var i = 0; i < checked.length; i++) {
   checked[i].onclick = function() {
     getTotal();
   }
 }
-
 
 /**
  *
