@@ -50,35 +50,38 @@ var carProducts = [
 
 var tbody = document.getElementsByTagName("tbody")[0];
 addProducts();
-var increase = document.querySelectorAll(".increase");//找到加和减的DOM节点
-var reduce = document.querySelectorAll(".reduce");
-var rows = tbody.querySelectorAll(".row");//找到所有商品的行
-var checked = document.querySelectorAll(".checked");//找到所有单选框
-var allChecked = document.querySelector(".allChecked");//找到全部选中框
+var increase = tbody.querySelectorAll(".increase");
+var reduce = tbody.querySelectorAll(".reduce");
+var rows = tbody.querySelectorAll(".row");
+var checked = tbody.querySelectorAll(".checked");
+var allChecked = tbody.querySelector(".allChecked");
 nodeControls();
+
+
 
 function addProducts() {
   for (var i = 0; i < carProducts.length; i++) {
-    if(carProducts[i].count != 0) {
-      var name = carProducts[i].name;
-      var price = carProducts[i].price;
-      var checked = carProducts[i].checked ? 'checked' : '';
-      var count = carProducts[i].count;
-      var totalPrice = price * count;
-      
-      var goodsDescription = "<td><input type='checkbox' class='checked' "+checked+"/></td> <td>"+name+"</td> <td>"+price+"</td> <td><a href='#' class='num-change reduce'>-</a><span class='lineCount'>"+count+"</span><a href='#' class='num-change increase'>+</a></td> <td class='linePrice'>"+totalPrice+"</td>";
-      var tr = document.createElement("tr");
-      tr.className = "row";
-      tr.innerHTML = goodsDescription;
+    var checked = carProducts[i].checked ? 'checked' : '';
+    var name = carProducts[i].name;
+    var price = carProducts[i].price;
+    var count = carProducts[i].count;
+    var totalPrice = price * count;
     
-      var footer = document.getElementsByClassName("footer")[0];
-      tbody.insertBefore(tr,footer); 
-    }
+    var goodsInfo = 
+     "<td><input type='checkbox' class='checked'" + checked + "/></td>"
+    +"<td>" + name + "</td>" 
+    +"<td>" + price + "</td>"
+    +"<td><a href='#' class='num-change reduce'>-</a><span class='lineCount'>"+count+"</span><a href='#' class='num-change increase'>+</a></td>"
+    +"<td class='linePrice'>" + totalPrice + "</td>";
+
+    var tr = document.createElement("tr");
+    tr.className = "row";
+    tr.innerHTML = goodsInfo;
+  
+    var footer = document.getElementsByClassName("footer")[0];
+    tbody.insertBefore(tr,footer); 
   }
 }
-
-
-
 
 function nodeControls() {
   for(var i = 0; i < increase.length; i++) {
@@ -108,19 +111,15 @@ function nodeControls() {
   });   
 }
 
-
-
 function getTotal() {
   var Count = 0;
   var Price = 0;
   rows = tbody.querySelectorAll(".row");
   for(var i = 0; i < rows.length; i++) {
     var check = rows[i].querySelector(".checked");
-    if(check.checked == true) {
-      var lineCount = rows[i].querySelector(".lineCount").innerText;
-      var linePrice = rows[i].querySelector(".linePrice").innerText;
-      lineCount = Number(lineCount);
-      linePrice = Number(linePrice);
+    if(check.checked) {
+      var lineCount = Number(rows[i].querySelector(".lineCount").innerText);
+      var linePrice = Number(rows[i].querySelector(".linePrice").innerText);
       Count += lineCount;
       Price += linePrice;
     }
@@ -147,19 +146,18 @@ function getTotal() {
 function numberChange(dom,act) {
   var amount = dom.parentNode;
   var span = amount.getElementsByTagName('span')[0];
-  if(act == "increase") {
+  if("increase" == act) {
     ++span.innerText;
   }
-  else if(act == "reduce") {
+  else if("reduce" == act) {
     --span.innerText;
-    if(span.innerText == 0) {
+    if(!span.innerText) {
       tbody.removeChild(amount.parentNode);
     }
   }
   else {
     return;
   }
- 
   var tr = amount.parentNode;
   var price = tr.getElementsByTagName("td")[2].innerText;
   var count = span.innerText;
