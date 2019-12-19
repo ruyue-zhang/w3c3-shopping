@@ -60,19 +60,24 @@ nodeControls();
 
 
 function addProducts() {
+  var totalCount = 0;
+  var totalPrice = 0;
   for (var i = 0; i < carProducts.length; i++) {
     var checked = carProducts[i].checked ? 'checked' : '';
     var name = carProducts[i].name;
     var price = carProducts[i].price;
     var count = carProducts[i].count;
-    var totalPrice = price * count;
-    
+    var rowPrice = price * count;
+    if(checked) {
+      totalCount += count;
+      totalPrice += rowPrice;
+    }
     var goodsInfo = 
-     "<td><input type='checkbox' class='checked'" + checked + "/></td>"
-    +"<td>" + name + "</td>" 
-    +"<td>" + price + "</td>"
-    +"<td><a href='#' class='num-change reduce'>-</a><span class='lineCount'>"+count+"</span><a href='#' class='num-change increase'>+</a></td>"
-    +"<td class='linePrice'>" + totalPrice + "</td>";
+              "<td><input type='checkbox' class='checked'" + checked + "/></td>"
+              +"<td>" + name + "</td>" 
+              +"<td>" + price + "</td>"
+              +"<td><a href='#' class='num-change reduce'>-</a><span class='lineCount'>"+count+"</span><a href='#' class='num-change increase'>+</a></td>"
+              +"<td class='linePrice'>" + rowPrice + "</td>";
 
     var tr = document.createElement("tr");
     tr.className = "row";
@@ -81,6 +86,8 @@ function addProducts() {
     var footer = document.getElementsByClassName("footer")[0];
     tbody.insertBefore(tr,footer); 
   }
+  tbody.querySelector(".totalCount").innerText = totalCount;
+  tbody.querySelector(".totalPrice").innerText = totalPrice;
 }
 
 function nodeControls() {
@@ -151,7 +158,7 @@ function numberChange(dom,act) {
   }
   else if("reduce" == act) {
     --span.innerText;
-    if(!span.innerText) {
+    if(span.innerText == 0) {
       tbody.removeChild(amount.parentNode);
     }
   }
