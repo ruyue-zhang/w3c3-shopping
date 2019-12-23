@@ -38,28 +38,28 @@ tr {
   line-height: 40px;
 }
 
-#choose {
+.choose {
   width: 100px;
 }
 
-#name {
+.name {
   width: 200px;
 }
 
-#price {
+.price {
   width: 100px;
 }
 
-#total-number {
+.total-number {
   width: 150px;
 }
 
-#total-price {
+.total-price {
   width: 100px;
 }
 
 
-#account {
+.account {
   padding-right: 15px;
   text-align: right;
 }

@@ -57,8 +57,6 @@ var checked = tbody.querySelectorAll(".checked");
 var allChecked = tbody.querySelector(".allChecked");
 nodeControls();
 
-
-
 function addProducts() {
   var totalCount = 0;
   var totalPrice = 0;
